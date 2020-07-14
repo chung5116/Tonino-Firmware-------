@@ -135,6 +135,10 @@ void ToninoSerial::scan() {
   Serial.print("SCAN:");
   Serial.print(val);
   Serial.print("\n");
+  _display->printNumber(val);
+  delay(2000);
+  _display->clear();
+
 
   if (val < 0 || val > 9999) {
     _display->line();

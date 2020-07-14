@@ -71,9 +71,17 @@
 #include <avr/power.h>
 // low power library, https://github.com/rocketscream/Low-Power, Version 1.30
 #include <LowPower.h>
+// TM1637 LCD linbrary
+#include <TM1637Display.h>
 
 // LCD object
 LCD display = LCD();
+
+// Create display object of type TM1637Display:
+#define CLK 9
+#define DIO 8
+
+TM1637Display newDisplay = TM1637Display(CLK, DIO);
 
 // color sensor object
 #define CS_POWER 2
@@ -291,6 +299,10 @@ void setup() {
   display.init(0x70);
   display.clear();
 
+  // new LCD init
+  newDisplay.clear();
+  newDisplay.setBrightness(3);
+
   // color sensor init
   colorSense.init();
 
@@ -324,6 +336,10 @@ void loop() {
   // store when last action was detected (for low power idle mode)
   uint32_t lastTimestamp = 0;
   float lastRaw = 0.0; // last calibrated r/b result
+  
+
+  
+  newDisplay.setSegments(7,false); // Turn off
   
   while(true) {
     // check this setting within the while loop as it could be changed during runtime
@@ -376,5 +392,6 @@ void loop() {
       
     lastTimestamp = checkLowPowerMode(false, lastTimestamp);
   }
+
 }
 

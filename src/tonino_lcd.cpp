@@ -131,9 +131,12 @@ inline void LCD::writeDigitNum(uint8_t d, uint8_t num) {
 
 // display a number n from -999 to 9999
 void LCD::printNumber(int16_t n) {
+  
+  
   if (n < -999 || n > 9999) {
     error();
   }
+  newDisplay.showNumberDec(n);
 
   uint8_t numericDigits = 4;   // available digits on display
   int8_t displayPos = 4;
@@ -295,6 +298,8 @@ void LCD::clear() {
   writeDigitRaw(3, 0);
   writeDigitRaw(4, 0);
   writeDisplay();
+
+  newDisplay.clear();
 }
 
 // light up the dot of the first digit

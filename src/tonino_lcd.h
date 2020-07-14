@@ -41,6 +41,9 @@
 #ifndef _TONINO_LCD_H
 #define _TONINO_LCD_H
 
+#include <TM1637Display.h>
+extern TM1637Display newDisplay;
+
 #if ARDUINO >= 100
  #include "Arduino.h"
 #else
